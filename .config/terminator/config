@@ -6,11 +6,11 @@
     background_darkness = 0.96
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = Monospace 10
-    foreground_color = "#ebdbb2"
+    font = Fira Code 12
+    foreground_color = "#a0a0a0"
     show_titlebar = False
     scrollback_lines = 3000
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#3584e4:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#3584e4:#ff00ff:#00ffff:#ffffff"
+    palette = "#000000:#cd0000:#00ca00:#dddd00:#3a81da:#aa00aa:#00cdcd:#a0a0a0:#404040:#ff0000:#00ff00:#ecec00:#3584e4:#ff00ff:#00ffff:#ffffff"
     use_system_font = False
 [layouts]
   [[default]]
