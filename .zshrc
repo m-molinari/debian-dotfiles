@@ -3,9 +3,13 @@
 #######################################################################
 
 # Set up the prompt
-#
-export PS1='%F{red}% ┌─%F{green}%n@%m %F{red}%]─[%F{blue}% %~%F{red}% ]
-%F{red}% └──╼ %F{yellow}% $ '
+
+# Kali stype
+#export PS1='%F{red}% ┌─%F{green}%n@%m %F{red}%]─[%F{blue}% %~%F{red}% ]
+#%F{red}% └──╼ %F{yellow}% $ '
+
+export PS1='%F{green}%n:%F{blue}% %~
+ %F{green}% > '
 
 # Package zsh-autosuggestions
 #
