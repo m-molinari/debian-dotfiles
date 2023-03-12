@@ -102,9 +102,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screenshot with scrot
-# bindsym Print exec --no-startup-id i3-scrot
-# bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-# bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+# bindsym Print exec --no-startup-id scrot "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
+# bindsym $mod+Print --release exec --no-startup-id scrot -w "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
+# bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
 
 # Screenshots
 #
