@@ -112,7 +112,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 ################################################################################################
 # Screenshots
 ################################################################################################
-#
+
 # PrtScrn = Full Screen
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
 # Super + PrtScrn = Active Window
@@ -366,7 +366,6 @@ bindsym $mod+r mode "resize"
 #set_from_resource $term_color13    color13
 #set_from_resource $term_color14    color14
 #set_from_resource $term_color15    color15
-
 
 ################################################################################################
 # BAR
