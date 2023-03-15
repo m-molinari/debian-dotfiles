@@ -31,6 +31,10 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
+# Floating default size
+floating_minimum_size 900 x 700
+floating_maximum_size 900 x 700
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #
@@ -59,16 +63,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #
 exec --no-startup-id nm-applet
 
+################################################################################################
+# SOUND
+################################################################################################
 
-################################################################################################
-## sound-section ##
-################################################################################################
 exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminator -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
-
 
 # Use pactl to adjust volume in PulseAudio.
 #
@@ -106,7 +109,9 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # bindsym $mod+Print --release exec --no-startup-id scrot -w "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
 # bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
 
+################################################################################################
 # Screenshots
+################################################################################################
 #
 # PrtScrn = Full Screen
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
@@ -128,7 +133,10 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 #
 floating_modifier $mod
 
+################################################################################################
 # Start Applications
+################################################################################################
+
 #bindsym $mod+F3 exec ranger
 #bindsym $mod+t exec --no-startup-id pkill picom
 #bindsym $mod+Ctrl+t exec --no-startup-id picom -b
@@ -155,6 +163,10 @@ bindsym $mod+q kill
 #
 #bindsym $mod+d exec rofi -show run
 bindcode 133 --release exec rofi -show run
+
+################################################################################################
+# FOCUS
+################################################################################################
 
 # change focus
 #
@@ -183,6 +195,10 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+################################################################################################
+# LAYOUT & SPLIT
+################################################################################################
 
 # split in horizontal orientation
 #
@@ -218,7 +234,9 @@ bindsym $mod+a focus parent
 #
 #bindsym $mod+d focus child
 
-# my keybinding
+################################################################################################
+# CUSTOM KEYBINDINGS
+################################################################################################
 #
 bindsym $mod+c exec /usr/bin/nm-connection-editor
 bindsym $mod+Ctrl+f exec `which firefox`
@@ -227,6 +245,10 @@ bindsym $mod+Ctrl+t exec `which thunderbird`
 bindsym $mod+Ctrl+n exec `which nemo`
 #
 # end my binding
+
+################################################################################################
+# WORKSPACES
+################################################################################################
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -270,6 +292,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+################################################################################################
+# RELOAD RESTART
+################################################################################################
+
 # reload the configuration file
 #
 bindsym $mod+Shift+c reload
@@ -281,6 +307,10 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+################################################################################################
+# RESIZE
+################################################################################################
 
 # resize window (you can also use the mouse for that)
 #
@@ -337,30 +367,37 @@ bindsym $mod+r mode "resize"
 #set_from_resource $term_color15    color15
 
 
+################################################################################################
+# BAR
+################################################################################################
+
+# Polybar
+# if actve Polybar comment out bar section
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
 bar {
-	status_command i3status -c ~/.config/i3status/i3status.conf
-        #status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
-	#status_command ~/.config/polybar/launch
-	mode dock
-	hidden_state show
-	position bottom
-#	font pango:monospace 8
+    status_command i3status -c ~/.config/i3status/i3status.conf
+    #status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
+    mode dock
+    hidden_state show
+    position bottom
+    #font pango:monospace 8
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#       tray_output primary
-#       tray_output eDP1
+#  tray_output primary
+#  tray_output eDP1
 
-       strip_workspace_numbers yes
-   colors {
+    strip_workspace_numbers yes
+    colors {
         background #222D31
         statusline #F9FAF9
         separator  #454947
 
-	# debian #d92d61
-	#                  border  bg 	   text
+        # debian #d92d61
+        #                  border  bg 	   text
         #focused_workspace  #F9FAF9 #d92d61 #292F34
         focused_workspace  #F9FAF9 #d92d61 #EEE8D5
         active_workspace   #595B5B #353836 #FDF6E3
@@ -368,26 +405,22 @@ bar {
         binding_mode       #d92d61 #2C2C2C #F9FAF9
         urgent_workspace   #d92d61 #FDF6E3 #E5201D
     }
+}
 
-
-	}
-
-#####################################################
-## Autostart applications                          ##
-#####################################################
+################################################################################################
+# Autostart applications
+################################################################################################
 
 exec_always setxkbmap it
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id "killall -q /usr/bin/picom; /usr/bin/picom --xrender-sync-fence --config ~/.config/picom/picom.conf -b"
 #exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec_always --no-startup-id dunst
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-#exec --no-startup-id dunst
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec conky -c ~/.config/conky/conky.conf
-
 
 # Display resolution change output with real display
 #
@@ -400,12 +433,16 @@ exec_always feh --bg-fill /usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-n
 
 # Keybind for lock screen
 #
- bindsym $mod+x exec i3lock -c 040003
+bindsym $mod+x exec i3lock -c 040003
 #bindsym $mod+x exec ~/.config/i3lock/lock.sh
 
 # Autolock screen after inactivity
 #
 exec xautolock -detectsleep -time 20 -locker "~/.config/i3lock/lock.sh"
+
+################################################################################################
+# FLOATING AND RULES
+################################################################################################
 
 # Find class/title name typing 'xprop' and click on window
 # take vlue of WM_CLASS(STRING)
