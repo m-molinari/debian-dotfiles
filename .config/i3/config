@@ -83,15 +83,15 @@ bindsym $mod+Ctrl+m exec terminator -e 'alsamixer'
 
 # Change volume or toggle mute
 #
-#bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-#bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-#bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 
 # Change volume or toggle mute
 #
-bindsym $mod+F1 exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
-bindsym $mod+F3 exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-bindsym $mod+F2 exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+#bindsym $mod+F1 exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+#bindsym $mod+F3 exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+#bindsym $mod+F2 exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
 
 # volume Page_Up Page_Down 
 #
@@ -115,7 +115,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 #
 # PrtScrn = Full Screen
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
-# Super + PrtSnotify-sendnotify-sendcrn = Active Window
+# Super + PrtScrn = Active Window
 bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
 # Shift + PrtScrn = Selection
 bindsym $mod+p exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
@@ -237,11 +237,8 @@ bindsym $mod+a focus parent
 ################################################################################################
 # CUSTOM KEYBINDINGS
 ################################################################################################
-#
 
-# Open connection editor
 bindsym $mod+c exec /usr/bin/nm-connection-editor
-
 bindsym $mod+Ctrl+f exec `which firefox`
 bindsym $mod+Ctrl+g exec `which google-chrome-stable`
 bindsym $mod+Ctrl+t exec `which thunderbird`
@@ -249,9 +246,6 @@ bindsym $mod+Ctrl+n exec `which nemo`
 
 # Alt + Tab switching
 bindsym Mod1+Tab focus right
-
-#
-# end my binding
 
 ################################################################################################
 # WORKSPACES
