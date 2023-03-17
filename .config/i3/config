@@ -113,21 +113,23 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Screenshots
 ################################################################################################
 
-# PrtScrn = Full Screen
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
-# Super + PrtScrn = Active Window
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
-# Shift + PrtScrn = Selection
-bindsym $mod+p exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
-
+## PrtScrn = Full Screen
+#bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
+## Super + PrtScrn = Active Window
+#bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
+## Shift + PrtScrn = Selection
+#bindsym $mod+p exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshot_from_$(date '+%Y-%m-%d %H:%M:%S').png"
+#
 # Clipboard Screenshots
 #
-# Ctrl + PrtScrn = Clipboard Full Screen
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-# Ctrl + Shift + PrtScrn = Clipboard Selection
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-# Ctrl + Super + PrRScrn = Clipboard Active Window
-bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+## Ctrl + PrtScrn = Clipboard Full Screen
+#bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+## Ctrl + Shift + PrtScrn = Clipboard Selection
+#bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+## Ctrl + Super + PrRScrn = Clipboard Active Window
+#bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+
+bindsym Print exec --no-startup-id flameshot gui
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 #
@@ -162,7 +164,8 @@ bindsym $mod+q kill
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 #
 #bindsym $mod+d exec rofi -show run
-bindcode 133 --release exec rofi -show run
+#bindcode 133 --release exec rofi -show run
+bindcode 133 --release exec --no-startup-id rofi -show drun -display-drun "Search" -theme Pop-Dark
 
 ################################################################################################
 # FOCUS
@@ -413,11 +416,14 @@ bar {
 
 exec_always setxkbmap it
 exec_always --no-startup-id setcursor
-exec_always --no-startup-id "killall -q /usr/bin/picom; /usr/bin/picom --xrender-sync-fence --config ~/.config/picom/picom.conf -b"
+#exec_always --no-startup-id "killall -q /usr/bin/picom; /usr/bin/picom --xrender-sync-fence --config ~/.config/picom/picom.conf -b"
+
+# Picom compositor with transparency
+exec --no-startup-id picom -CGb
+
 #exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec_always --no-startup-id dunst
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec conky -c ~/.config/conky/conky.conf
@@ -439,6 +445,7 @@ bindsym $mod+x exec i3lock-fancy
 
 # Autolock screen after inactivity
 #
+#exec xautolock -detectsleep -time 20 -locker "~/.config/i3lock/lock.sh"
 exec xautolock -detectsleep -time 20 -locker "i3lock-fancy"
 
 ################################################################################################
