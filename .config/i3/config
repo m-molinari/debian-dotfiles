@@ -74,7 +74,10 @@ exec_always --no-startup-id dunst
 #exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # Authentication agent
-exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#
+#policykit-desktop-privileges policykit-1-gnome
+exec_always --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # NetworkManager
 exec --no-startup-id nm-applet
@@ -114,6 +117,8 @@ exec xautolock -detectsleep -time 20 -locker "i3lock-fancy"
 ################################################################################################
 # KEYBINDINGS
 ################################################################################################
+
+#bindsym $mod+z exec ~/.config/i3/scripts/XXX
 
 # Split in horizontal orientation
 bindsym $mod+h split h ;exec notify-send 'tile horizontally'
