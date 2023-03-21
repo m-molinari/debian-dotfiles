@@ -174,3 +174,7 @@ export LESS="-R"
 # custom dir colors
 #
 [ -f ~/.dir_colors ] && eval $(dircolors -b ~/.dir_colors)
+
+# ssh-add
+#
+#ssh-add -l > /dev/null || ssh-add
