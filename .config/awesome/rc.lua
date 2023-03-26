@@ -22,9 +22,6 @@ require("awful.hotkeys_popup.keys")
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
--- Calendar
-
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -300,6 +297,43 @@ globalkeys = gears.table.join(
             end
         end,
         {description = "go back", group = "client"}),
+
+   -- ALSA volume control
+   awful.key({}, "XF86AudioRaiseVolume",
+      function()
+         awful.spawn("amixer -D pulse sset Master 5%+", false)
+         awesome.emit_signal("volume_change")
+      end,
+      {description = "volume up", group = "hotkeys"}
+   ),
+   awful.key({}, "XF86AudioLowerVolume",
+      function()
+         awful.spawn("amixer -D pulse sset Master 5%-", false)
+         awesome.emit_signal("volume_change")
+      end,
+      {description = "volume down", group = "hotkeys"}
+   ),
+   awful.key({}, "XF86AudioMute",
+      function()
+         awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+         awesome.emit_signal("volume_change")
+      end,
+      {description = "toggle mute", group = "hotkeys"}
+   ),
+
+   -- Brightness
+   awful.key({}, "XF86MonBrightnessUp",
+      function()
+         awful.spawn("xbacklight -inc 10", false)
+      end,
+      {description = "+10%", group = "hotkeys"}
+   ),
+   awful.key({}, "XF86MonBrightnessDown",
+      function()
+         awful.spawn("xbacklight -dec 10", false)
+      end,
+      {description = "-10%", group = "hotkeys"}
+   ),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -603,6 +637,5 @@ awful.spawn.with_shell("xfce4-power-manager")
 awful.spawn.with_shell("setxkbmap it")
 awful.spawn.with_shell("xautolock -detectsleep -time 20 -locker 'i3lock-fancy'")
 --awful.spawn.with_shell("~/screenlayout/virtual.sh")
-
 
 
