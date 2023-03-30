@@ -22,8 +22,11 @@ title_align center
 default_border normal
 default_floating_border normal
 
-# Hide borders
-hide_edge_borders none
+# hide_edge_borders none|vertical|horizontal|both|smart|smart_no_gaps
+hide_edge_borders smart
+
+# If activated, marks (see [vim_like_marks]) on windows are drawn in their window decoration
+show_marks yes
 
 # Activate smart borders (always)
 #smart_borders on
@@ -252,6 +255,12 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # FOCUS
 ################################################################################################
 
+# Focus Applications
+bindsym $mod+Shift+f [class="Firefox"] focus
+bindsym $mod+Shift+t [class="Thunderbird"] focus
+bindsym $mod+Shift+k [class="KeePassXC"] focus
+bindsym $mod+Shift+n [class="Nemo"] focus
+
 # change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
@@ -317,6 +326,9 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# Assume you are on workspace "1: www" and switch to "2: IM" using mod+2 because somebody sent you a message. You don’t need to remember where you came from now, you can just press $mod+2 again to switch back to "1: www"
+workspace_auto_back_and_forth yes
 
 # switch to workspace
 #
