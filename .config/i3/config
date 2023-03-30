@@ -9,6 +9,9 @@ set $alt Mod1
 # Variables
 set $terminal terminator
 
+# Focus
+focus_follows_mouse yes
+
 # Default Workspace Layout <default|stacking|tabbed>
 workspace_layout tabbed
 
@@ -16,11 +19,11 @@ workspace_layout tabbed
 title_align center
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-#default_border pixel 1
-#default_floating_border normal
+default_border normal
+default_floating_border normal
 
 # Hide borders
-#hide_edge_borders none
+hide_edge_borders none
 
 # Activate smart borders (always)
 #smart_borders on
@@ -29,7 +32,7 @@ title_align center
 #smart_borders no_gaps
 
 # Floating default size
-floating_minimum_size 900 x 700
+#floating_minimum_size 900 x 700
 #floating_maximum_size 900 x 700
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -74,8 +77,6 @@ exec_always --no-startup-id dunst
 #exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # Authentication agent
-#exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#
 #policykit-desktop-privileges policykit-1-gnome
 exec_always --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
@@ -93,11 +94,13 @@ exec --no-startup-id xfce4-power-manager
 exec_always  ~/screenlayout/virtual.sh
 
 # Wallpaper
-exec_always feh --bg-fill /usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png
+#exec_always feh --bg-fill /usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png
+exec_always feh --bg-fill /usr/share/backgrounds/gnome/LightWaves.jpg
 
 # Autolock screen after inactivity
+#exec xautolock -detectsleep -time 20 -locker "i3lock"
 #exec xautolock -detectsleep -time 20 -locker "~/.config/i3lock/lock.sh"
-exec xautolock -detectsleep -time 20 -locker "i3lock-fancy"
+exec xautolock -detectsleep -time 15 -locker "i3lock-fancy"
 
 # Sounds
 #exec --no-startup-id pulseaudio
@@ -130,14 +133,14 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle
+bindsym $mod+s floating toggle
 
 # Change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # Focus the parent container
 bindsym $mod+a focus parent
@@ -156,14 +159,13 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+q kill
 
 # dmenu (a program launcher)
-#
 #bindsym $mod+d exec --no-startup-id dmenu_run
 
 # rofi
-#
 #bindsym $mod+d exec rofi -show run
 #bindcode 133 --release exec rofi -show run
-bindcode 133 --release exec --no-startup-id rofi -show drun -display-drun "Search" -theme Pop-Dark
+#bindcode 133 --release exec --no-startup-id rofi -show drun -display-drun "Search" -theme Pop-Dark
+bindsym $mod+d  exec --no-startup-id rofi -show drun -display-drun "Search" -theme Pop-Dark
 
 # Press $mod+o followed by either f, t, Escape or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
@@ -198,19 +200,15 @@ bindsym $alt+Tab focus right
 bindsym $mod+r mode "resize"
 
 # reload the configuration file
-#
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-#
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Keybind for lock screen
-#
 bindsym Ctrl+$alt+l exec i3lock-fancy
 #bindsym $mod+x exec i3lock -c 040003
 #bindsym $mod+x exec ~/.config/i3lock/lock.sh
@@ -254,32 +252,29 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # FOCUS
 ################################################################################################
 
-## change focus
-##
+# change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
 #bindsym $mod+l focus up
 #bindsym $mod+ograve focus right
 
 # alternatively, you can use the cursor keys:
-#
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-## move focused window
-##
-#bindsym $mod+Shift+j move left
-#bindsym $mod+Shift+k move down
-#bindsym $mod+Shift+l move up
-#bindsym $mod+Shift+ograve move right
+# move focused window
+#bindsym $mod+Ctrl+j move left
+#bindsym $mod+Ctrl+k move down
+#bindsym $mod+Ctrl+l move up
+#bindsym $mod+Ctrl+ograve move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Ctrl+Left move left
+bindsym $mod+Ctrl+Down move down
+bindsym $mod+Ctrl+Up move up
+bindsym $mod+Ctrl+Right move right
 
 ################################################################################################
 # Screenshots Keybindings
@@ -354,7 +349,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 ################################################################################################
 
 # resize window (you can also use the mouse for that)
-#
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -468,7 +462,6 @@ for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
 for_window [title="Terminator Preferences"] floating enable
 #for_window [class="KeePassXC"] floating enable resize set 800px 600px
-#
 for_window [class="Skype"] floating enable resize set 800px 600px
 for_window [class="VirtualBox Manager"] floating enable resize set 800px 600px
 for_window [class="lightdm-gtk-greeter-settings"] floating enable resize set 800px 600px
@@ -477,4 +470,3 @@ for_window [class="GParted"] floating enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable border normal
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-
