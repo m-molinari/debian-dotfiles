@@ -83,6 +83,9 @@ exec_always --no-startup-id dunst
 #policykit-desktop-privileges policykit-1-gnome
 exec_always --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
+# Gnome keyring
+exec_always --no-startup-id /usr/bin/gnome-keyring-daemon --start
+
 # NetworkManager
 exec --no-startup-id nm-applet
 
@@ -178,7 +181,7 @@ bindsym $mod+o mode "$mode_launcher"
 mode "$mode_launcher" {
     bindsym f exec firefox
     bindsym t exec thunderbird
-    bindsym g exec google-chrome-stable
+    bindsym g exec google-chrome-stable --password-store=gnome
     bindsym k exec keepassxc
     bindsym n exec nemo
     bindsym v exec pavucontrol
@@ -189,7 +192,7 @@ mode "$mode_launcher" {
 
 bindsym $mod+c exec /usr/bin/nm-connection-editor
 bindsym $mod+Ctrl+f exec `which firefox`
-bindsym $mod+Ctrl+g exec `which google-chrome-stable`
+bindsym $mod+Ctrl+g exec `which google-chrome-stable --password-store=gnome`
 bindsym $mod+Ctrl+t exec `which thunderbird`
 bindsym $mod+Ctrl+n exec `which nemo`
 bindsym $mod+Ctrl+k exec `which keepassxc`
@@ -257,6 +260,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 # Focus Applications
 bindsym $mod+Shift+f [class="Firefox"] focus
+bindsym $mod+Shift+g [class="Google-chrome"] focus
+bindsym $mod+Shift+b [class="Terminator"] focus
 bindsym $mod+Shift+t [class="Thunderbird"] focus
 bindsym $mod+Shift+k [class="KeePassXC"] focus
 bindsym $mod+Shift+n [class="Nemo"] focus
@@ -462,23 +467,37 @@ client.background       #FFFFFF
 ################################################################################################
 # FLOATING AND RULES
 ################################################################################################
-
 # Find class/title name typing 'xprop' and click on window
 # take vlue of WM_CLASS(STRING)
+
+# Compares the window class (the second part of WM_CLASS)
+# Compares the window instance (the first part of WM_CLASS)
+# Compares the window role (WM_WINDOW_ROLE).
+# Compares the X11 window ID, which you can get via xwininfo for example.
+# Compares the X11 window title (_NET_WM_NAME or WM_NAME as fallback).
+#
+# sticky enable|disable|toggle
+# floating enable|disable
+# border normal|pixel|toggle [<n>]
+# resize grow|shrink <direction> [<px> px [or <ppt> ppt]]
+# resize set [width] <width> [px | ppt]
+# resize set height <height> [px | ppt]
+# resize set [width] <width> [px | ppt] [height] <height> [px | ppt]
+# move window|container to mark <mark>
 
 # Workspace rule
 for_window [class="KeePassXC"] move to workspace $ws2
 
-# Open specific applications in floating mode
+# Floating Rule
+for_window [class="thunderbird-default" instance="Msgcompose"] floating enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [title="File Transfer*"] floating enable
 for_window [title="Terminator Preferences"] floating enable
-#for_window [class="KeePassXC"] floating enable resize set 800px 600px
-for_window [class="Skype"] floating enable resize set 800px 600px
-for_window [class="VirtualBox Manager"] floating enable resize set 800px 600px
-for_window [class="lightdm-gtk-greeter-settings"] floating enable resize set 800px 600px
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
+for_window [class="KeePassXC"] floating enable resize set 900px 800px
+for_window [class="VirtualBox Manager"] floating enable resize set 900px 800px
+for_window [class="lightdm-gtk-greeter-settings"] floating enable resize set 900px 800px
+for_window [class="Galculator" class="Gnome-calculator" instance="gnome-calculator"] floating enable
+for_window [class="GParted"] floating enable
 for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable border normal
-for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating enable
