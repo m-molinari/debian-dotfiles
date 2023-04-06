@@ -116,6 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Editor
+export VISUAL=vim
+export EDITOR=vim
+
 # Reset
 Color_Off='\033[0m'
 
