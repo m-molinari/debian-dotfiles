@@ -8,8 +8,12 @@
 #export PS1='%F{red}% ┌─%F{green}%n@%m %F{red}%]─[%F{blue}% %~%F{red}% ]
 #%F{red}% └──╼ %F{yellow}% $ '
 
-export PS1='%F{green}%n:%F{blue}% %~
- %F{green}% > '
+# Modern
+#export PS1='%F{green}%n:%F{blue}% %~
+# %F{green}% > '
+
+# Simple, like Debian prompt
+export PS1='%F{green}%n@%m%F{white}:%F{blue}% %~%F{red}% %F{white}% $ '
 
 # Package zsh-autosuggestions
 #
