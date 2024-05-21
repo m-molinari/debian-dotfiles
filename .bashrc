@@ -182,3 +182,8 @@ export LESS="-R"
 # ssh-add
 #
 #ssh-add -l > /dev/null || ssh-add
+
+# Kubernetes
+source <(kubectl completion bash)
+alias k=kubectl
+complete -o default -F __start_kubectl k
